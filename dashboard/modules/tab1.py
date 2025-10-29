@@ -1,34 +1,23 @@
+# dashboard/modules/tab1.py
 import streamlit as st
+from .common import card, placeholder, section_header   # ← 같은 폴더이므로 단일 점
 
-def _empty_card(title: str, height_class: str):
-    st.markdown(
-        f"""
-        <div class="card">
-          <div class="card-title">{title}</div>
-          <div class="card-body {height_class}"></div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+def render(title: str = "실시간 데이터 확인"):
+    section_header(title)
 
-def render(tab_name: str):
-    st.subheader(tab_name)
-    st.caption("스타일 전용 빈 카드 레이아웃")
+    t1, t2, t3 = st.columns(3, gap="large")
+    with t1: 
+        with card("Top - Card 1"): placeholder(150)
+    with t2: 
+        with card("Top - Card 2"): placeholder(150)
+    with t3: 
+        with card("Top - Card 3"): placeholder(150)
 
-    # 상단 3
-    c1, c2, c3 = st.columns(3, gap="large")
-    with c1: _empty_card("Top - Card 1", "h-top")
-    with c2: _empty_card("Top - Card 2", "h-top")
-    with c3: _empty_card("Top - Card 3", "h-top")
+    m1, m2 = st.columns([2,1], gap="large")
+    with m1:
+        with card("Middle - Card 1"): placeholder(300)
+    with m2:
+        with card("Middle - Card 2"): placeholder(300)
 
-    st.write("")
-
-    # 중단 2
-    m1, m2 = st.columns([3, 2], gap="large")
-    with m1: _empty_card("Middle - Card 1", "h-mid")
-    with m2: _empty_card("Middle - Card 2", "h-mid")
-
-    st.write("")
-
-    # 하단 1
-    _empty_card("Bottom - Large Card", "h-large")
+    with card("Bottom - Large Card"):
+        placeholder(260)
